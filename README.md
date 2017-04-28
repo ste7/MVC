@@ -15,7 +15,7 @@ $GLOBALS['mysql'] = [
 ```
 // use $_handler property to handle with database class
 // every method in DB class returns an object so you need to use
-// first() or last() method to get a results
+// first(), last() or results() method to get a results
 
 public function user($id){
     return $this->_handler
