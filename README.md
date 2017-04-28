@@ -46,5 +46,5 @@ $app->get('App\Controllers\HomeController', 'getHome');
 ```
 // data will be accessible in $data array
 
-$data['username']->first()->username;
+echo $data['username']->first()->username;
 ```
