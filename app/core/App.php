@@ -6,6 +6,6 @@ class App
 {
     public function get($class, $method)
     {
-        return call_user_func(array((new $class), $method));
+        call_user_func(array((new $class), $method));
     }
 }

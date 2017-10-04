@@ -5,23 +5,15 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function getHome(){
-        $id = $this->getParam();
-        $user = new User();
-        $username = $user->user($id);
-        
-        return parent::view('home/[id]', ['username' => $username]);
-    }
-    
-    public function home()
+    public function getHome()
     {
         $user = new User();
 
-        return parent::view('home', $user->users());
-    }
+        $users = $user->_handler
+            ->table('users')
+            ->get()
+            ->results();
 
-    public function getAbout()
-    {
-        return parent::view('about', ['name' => 'ona']);
+        return parent::view('home', ['users' => $users]);
     }
 }

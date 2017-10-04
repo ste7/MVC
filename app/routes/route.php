@@ -7,6 +7,6 @@ $parse = new Parse('url');
 $app = new App();
 
 
+
 $app->get('App\Controllers\HomeController', 'getHome');
-$app->get('App\Controllers\HomeController', 'home');
-$app->get('App\Controllers\HomeController', 'getAbout');
+$app->get('App\Controllers\UserController', 'getUser');

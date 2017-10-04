@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Libs;
+namespace App\Database;
 use \PDO;
 
-class DB extends PDO{
+class DB
+{
     private $_handler;
     
     private $_table;
@@ -16,24 +17,11 @@ class DB extends PDO{
 
     private $_result;
 
-    private static $_instance = null;
 
     public function __construct(){
-        try{
-            $this->_handler = new PDO('mysql:host='.config('host').';dbname='.config('dbname'), config('user'), config('pass'));
-            $this->_handler->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        } catch(PDOException $e){
-            echo $e->getMessage();
-        }
+        $this->_handler = Connection::getInstance();
     }
 
-    public static function getInstance(){
-        if(!self::$_instance){
-            self::$_instance = new DB();
-        }
-        return self::$_instance;
-    }
-    
 
     public function table($table){
         $this->_table = $table;

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use App\Libs\DB;
+use App\Database\DB;
 
-class Model{
-    protected $_handler;
+class Model
+{
+    public $_handler;
     
     public function __construct(){
-        $this->_handler = DB::getInstance();
+        $this->_handler = new DB();
     }
 }

@@ -8,3 +8,5 @@ $GLOBALS['mysql'] = [
     'pass' => '',
     'dbname' => 'mvcdb'
 ];
+
+define("APP_URL", "http://localhost/MVC/public/");
