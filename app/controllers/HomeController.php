@@ -16,4 +16,16 @@ class HomeController extends Controller
 
         return parent::view('home', ['users' => $users]);
     }
+
+    public function getTest()
+    {
+        $user = new User();
+
+        $users = $user->_handler
+            ->table('users')
+            ->where(['id' => 1])
+            ->get();
+
+        return parent::view('test/user', ['user' => $users->first()]);
+    }
 }

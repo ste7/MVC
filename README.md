@@ -13,38 +13,39 @@ $GLOBALS['mysql'] = [
 ```
 2 . create a new model in models directory witch will be extended a base Model class ``App\Models\Model`` and set a namespace
 ```
-// use $_handler property to handle with database class
-// every method in DB class returns an object so you need to use
-// first(), last() or results() method to get a results
-
-public function user($id){
-    return $this->_handler
-        ->table('users')
-        ->where(['id' => $id])
-        ->get();
-}
+//
 ```
 3 . create a new controller in controllers directory, extend a base Controller ``App\Controllers\Controller`` and set a namespace
 ```
+// use $_handler property to handle with database
+// every method in DB class returns an object so you need to use
+// first(), last() or results() method to get a results
+
 // use method getParam() to grab param from the url
 // return a view with a view() method from parent class
 // and send a data in array
 
-public function getHome(){
+public function getUser()
+{
     $id = $this->getParam();
+
     $user = new User();
-    $username = $user->user($id);
-    
-    return parent::view('home/[id]', ['username' => $username]);
+    $u = $user->_handler
+        ->table('users')
+        ->where(['id' => $id])
+        ->get()
+        ->results();
+
+    return parent::view('user/[id]', ['user' => $u]);
 }
 ```
 4 . every root call with ``$app->get('namespace', 'method')`` method in ``route.php``
 ```
-$app->get('App\Controllers\HomeController', 'getHome');
+$app->get('App\Controllers\UserController', 'getUser');
 ```
-5 . ``home.php``
+5 . ``user.php``
 ```
 // data will be accessible in $data array
 
-echo $data['username']->first()->username;
+echo json_encode($data['user']);
 ```

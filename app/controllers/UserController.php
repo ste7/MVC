@@ -8,9 +8,14 @@ class UserController extends Controller
     public function getUser()
     {
         $id = $this->getParam();
-        $user = new User();
-        $username = $user->_handler->table('users')->where(['id' => $id])->get()->results();
 
-        return parent::view('user/[id]', ['user' => $username]);
+        $user = new User();
+        $u = $user->_handler
+            ->table('users')
+            ->where(['id' => $id])
+            ->get()
+            ->results();
+
+        return parent::view('user/[id]', ['user' => $u]);
     }
 }
